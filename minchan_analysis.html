@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>권민찬의 별자리 운명 - 개인 자미두수 분석</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .birth-info {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 500px;
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .birth-detail {
+            font-size: 1.1rem;
+            margin: 8px 0;
+        }
+
+        .chart-section {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .chart-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #feca57;
+        }
+
+        .palace-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .palace-card {
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .palace-card.active {
+            border-color: #ff6b6b;
+            background: rgba(255,107,107,0.2);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255,107,107,0.3);
+        }
+
+        .palace-name {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .star-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .special-star {
+            color: #ff6b6b;
+            font-size: 1.4rem;
+        }
+
+        .major-stars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .star-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+        }
+
+        .star-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+
+        .qisha-card { border-left-color: #e74c3c; }
+        .tanlang-card { border-left-color: #f39c12; }
+        .pojun-card { border-left-color: #9b59b6; }
+        .lianzhen-card { border-left-color: #3498db; }
+
+        .star-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .star-emoji {
+            font-size: 2.5rem;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .star-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        .personality-analysis {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 2px solid rgba(72,219,251,0.3);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #48dbfb;
+        }
+
+        .trait-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .trait-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .trait-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .advice-section {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 2px solid rgba(254,202,87,0.3);
+        }
+
+        .advice-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .advice-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid;
+        }
+
+        .strength-card {
+            border-color: rgba(76,175,80,0.5);
+        }
+
+        .challenge-card {
+            border-color: rgba(255,152,0,0.5);
+        }
+
+        .advice-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .advice-list li {
+            margin: 10px 0;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            position: relative;
+            padding-left: 35px;
+        }
+
+        .advice-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 12px;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .interactive-section {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .action-btn {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(255,107,107,0.3);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255,107,107,0.4);
+        }
+
+        .fortune-prediction {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 2px solid rgba(155,89,182,0.3);
+        }
+
+        .years-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .year-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .year-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            .palace-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .advice-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .major-stars,
+            .trait-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+
+        /* 애니메이션 효과 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 도구 모달 스타일 */
+        .tool-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tool-modal.show {
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 20px;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: #feca57;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #ff6b6b;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        /* 감정 도구 스타일 */
+        .emotion-tool {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            color: white;
+        }
+
+        .emotion-wheel-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .emotion-center {
+            position: absolute;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .emotion-center #currentMood {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .emotion-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .emotion-buttons button {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .emotion-buttons button:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+
+        .breathing-circle {
+            width: 150px;
+            height: 150px;
+            border: 3px solid #48dbfb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .breathing-circle.active {
+            animation: breathingAnimation 4s infinite;
+        }
+
+        @keyframes breathingAnimation {
+            0%, 100% { transform: scale(1); border-color: #48dbfb; }
+            50% { transform: scale(1.2); border-color: #ff6b6b; }
+        }
+
+        .breathing-controls {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .breathing-controls button {
+            background: rgba(72,219,251,0.2);
+            border: 2px solid rgba(72,219,251,0.5);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .breathing-controls button:hover {
+            background: rgba(72,219,251,0.3);
+        }
+
+        /* 창작 도구 스타일 */
+        .creative-tool {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            color: white;
+        }
+
+        .canvas-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .canvas-controls button {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .canvas-controls button:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .canvas-controls button.active {
+            background: rgba(254,202,87,0.3);
+            border-color: #feca57;
+        }
+
+        #artCanvas {
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            background: white;
+            cursor: crosshair;
+        }
+
+        #emotionDiary {
+            width: 100%;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            resize: vertical;
+            font-family: inherit;
+            line-height: 1.6;
+        }
+
+        #emotionDiary::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .artwork-thumbnail {
+            width: 100%;
+            height: 80px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            object-fit: cover;
+        }
+
+        .artwork-thumbnail:hover {
+            transform: scale(1.1);
+        }
+
+        /* 리더십 도구 스타일 */
+        .leadership-tool {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            color: white;
+        }
+
+        .scenario-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .choice-buttons {
+            display: grid;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .choice-buttons button {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .choice-buttons button:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(5px);
+        }
+
+        .tip-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .tip-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 15px;
+            border-left: 4px solid #feca57;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* 공유 도구 스타일 */
+        .share-tool {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            color: white;
+        }
+
+        .customization-panel {
+            display: grid;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .customization-panel label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .customization-panel select,
+        .customization-panel textarea {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 10px;
+            color: white;
+            font-family: inherit;
+        }
+
+        .share-checkboxes {
+            display: grid;
+            gap: 10px;
+        }
+
+        .share-checkboxes label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: normal;
+        }
+
+        .share-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .share-btn {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .share-btn.instagram { border-color: #e1306c; }
+        .share-btn.kakao { border-color: #fee500; }
+        .share-btn.twitter { border-color: #1da1f2; }
+        .share-btn.download { border-color: #4CAF50; }
+
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            .modal-content {
+                max-width: 95vw;
+                max-height: 95vh;
+            }
+
+            .emotion-tool,
+            .creative-tool,
+            .leadership-tool,
+            .share-tool {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .tip-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .canvas-controls {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">🌟 권민찬의 별자리 운명 🌟</h1>
+            <div class="birth-info">
+                <div class="birth-detail">📅 <strong>생년월일:</strong> 2011년 10월 12일 (음력)</div>
+                <div class="birth-detail">⏰ <strong>출생시간:</strong> 오전 9시 30분</div>
+                <div class="birth-detail">📍 <strong>출생지:</strong> 서울</div>
+                <div class="birth-detail">🎂 <strong>현재 나이:</strong> 15세 (2025년 기준)</div>
+                <div class="birth-detail">🔥 <strong>핵심 별성:</strong> 칠살, 탐랑, 파군, 염정</div>
+            </div>
+        </header>
+
+        <section class="chart-section fade-in">
+            <h2 class="chart-title">📊 권민찬의 자미두수 명반</h2>
+            <div class="palace-grid">
+                <div class="palace-card">
+                    <div class="palace-name">시주 (명궁)</div>
+                    <div class="star-name">자미</div>
+                    <div>갑재</div>
+                </div>
+                <div class="palace-card">
+                    <div class="palace-name">일주 (형제궁)</div>
+                    <div class="star-name">염정</div>
+                    <div>일간(나)</div>
+                </div>
+                <div class="palace-card active">
+                    <div class="palace-name">월주 (부부궁)</div>
+                    <div class="star-name special-star">무술</div>
+                    <div>편인</div>
+                </div>
+                <div class="palace-card">
+                    <div class="palace-name">년주 (자녀궁)</div>
+                    <div class="star-name">신묘</div>
+                    <div>갑재</div>
+                </div>
+                <div class="palace-card active">
+                    <div class="palace-name">편관</div>
+                    <div class="star-name special-star">파군</div>
+                    <div>상관</div>
+                </div>
+                <div class="palace-card">
+                    <div class="palace-name">상관</div>
+                    <div class="star-name">자</div>
+                    <div>편인</div>
+                </div>
+                <div class="palace-card active">
+                    <div class="palace-name">편인</div>
+                    <div class="star-name special-star">무술</div>
+                    <div>정재</div>
+                </div>
+                <div class="palace-card">
+                    <div class="palace-name">정재</div>
+                    <div class="star-name">미</div>
+                    <div>술</div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 20px; opacity: 0.8;">
+                💫 <strong>오행:</strong> 목1, 화1, 토2, 금3, 수1 &nbsp;&nbsp; 
+                🎯 <strong>공망:</strong> 년주 오미, 천을귀인: 오미 월령: 폐
+            </p>
+        </section>
+
+        <section class="major-stars fade-in">
+            <div class="star-card qisha-card">
+                <div class="star-header">
+                    <div class="star-emoji">⚔️</div>
+                    <div class="star-title">칠살성 - 전사의 별</div>
+                </div>
+                <p><strong>위치:</strong> 편관 자리에 강하게 배치</p>
+                <p><strong>의미:</strong> 권민찬은 타고난 전사의 기질을 가지고 있어. 정의감이 강하고 불의를 참지 못하는 성격이야. 리더십이 뛰어나지만 때로는 충동적일 수 있어.</p>
+                <p><strong>발현시기:</strong> 학교에서 반장 역할을 하거나 친구들을 보호할 때 강하게 나타남</p>
+            </div>
+
+            <div class="star-card tanlang-card">
+                <div class="star-header">
+                    <div class="star-emoji">🎨</div>
+                    <div class="star-title">탐랑성 - 예술가의 별</div>
+                </div>
+                <p><strong>위치:</strong> 숨어있지만 강력한 영향력 보유</p>
+                <p><strong>의미:</strong> 다재다능하고 예술적 감각이 뛰어나. 새로운 것에 대한 호기심이 많고 학습 능력이 빨라. 다만 집중력 지속이 어려울 수 있어.</p>
+                <p><strong>발현시기:</strong> 창작 활동이나 새로운 취미를 시작할 때 두각을 나타냄</p>
+            </div>
+
+            <div class="star-card pojun-card">
+                <div class="star-header">
+                    <div class="star-emoji">💥</div>
+                    <div class="star-title">파군성 - 변화의 별</div>
+                </div>
+                <p><strong>위치:</strong> 편관 자리에서 칠살과 협력</p>
+                <p><strong>의미:</strong> 혁신적이고 변화를 추구하는 성격. 기존 질서에 도전하고 새로운 방식을 만들어내는 능력이 있어. 파괴와 창조를 동시에 하는 힘을 가졌어.</p>
+                <p><strong>발현시기:</strong> 15-17세 사이 가장 강하게 나타날 예정</p>
+            </div>
+
+            <div class="star-card lianzhen-card">
+                <div class="star-header">
+                    <div class="star-emoji">⚖️</div>
+                    <div class="star-title">염정성 - 심판관의 별</div>
+                </div>
+                <p><strong>위치:</strong> 일주(형제궁)에 위치</p>
+                <p><strong>의미:</strong> 선악을 분명히 구분하고 도덕적 기준이 확고해. 공정함을 중시하고 부정직한 것을 혐오해. 때로는 융통성이 부족할 수 있어.</p>
+                <p><strong>발현시기:</strong> 친구들 사이에서 중재자 역할을 할 때 나타남</p>
+            </div>
+        </section>
+
+        <section class="personality-analysis fade-in">
+            <h2 class="section-title">🧠 권민찬의 성격 분석</h2>
+            <div class="trait-grid">
+                <div class="trait-card">
+                    <div class="trait-title">💪 핵심 강점</div>
+                    <ul class="advice-list">
+                        <li>타고난 리더십과 카리스마</li>
+                        <li>강한 정의감과 보호 본능</li>
+                        <li>예술적 감각과 창의력</li>
+                        <li>새로운 것을 빠르게 학습하는 능력</li>
+                        <li>명확한 선악 판단력</li>
+                    </ul>
+                </div>
+                
+                <div class="trait-card">
+                    <div class="trait-title">⚠️ 주의할 점</div>
+                    <ul class="advice-list">
+                        <li>감정 조절의 어려움 (분노 폭발)</li>
+                        <li>충동적인 의사결정</li>
+                        <li>지속력과 인내심 부족</li>
+                        <li>완벽주의적 성향</li>
+                        <li>타협하기 어려운 성격</li>
+                    </ul>
+                </div>
+
+                <div class="trait-card">
+                    <div class="trait-title">🎯 재능 영역</div>
+                    <ul class="advice-list">
+                        <li>리더십 (반장, 동아리장)</li>
+                        <li>예술 창작 (미술, 음악, 글쓰기)</li>
+                        <li>스포츠 (팀 스포츠 특히 강함)</li>
+                        <li>사회 정의 관련 활동</li>
+                        <li>새로운 기술 습득</li>
+                    </ul>
+                </div>
+
+                <div class="trait-card">
+                    <div class="trait-title">🤝 인간관계</div>
+                    <ul class="advice-list">
+                        <li>친구들의 든든한 보호자 역할</li>
+                        <li>부당함을 참지 못해 갈등 발생 가능</li>
+                        <li>진실된 관계를 추구</li>
+                        <li>소수의 깊은 우정 선호</li>
+                        <li>권위에 도전하는 성향</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="advice-section fade-in">
+            <h2 class="section-title">🚀 권민찬을 위한 맞춤 조언</h2>
+            <div class="advice-grid">
+                <div class="advice-card strength-card">
+                    <h3 style="color: #4CAF50; margin-bottom: 15px;">💎 강점 활용법</h3>
+                    <ul class="advice-list">
+                        <li>학급 임원이나 동아리 리더 활동 적극 참여</li>
+                        <li>창작 동아리나 예술 활동으로 재능 개발</li>
+                        <li>봉사활동으로 정의감 발휘</li>
+                        <li>새로운 분야 도전 (코딩, 로봇, 과학실험)</li>
+                        <li>스포츠팀 주장이나 핵심 멤버 역할</li>
+                    </ul>
+                </div>
+
+                <div class="advice-card challenge-card">
+                    <h3 style="color: #FF9800; margin-bottom: 15px;">🎯 개선 방법</h3>
+                    <ul class="advice-list">
+                        <li>화가 날 때 10초 심호흡 하기</li>
+                        <li>다른 사람 의견도 끝까지 들어보기</li>
+                        <li>완벽하지 않아도 괜찮다는 마음가짐</li>
+                        <li>장기 목표 설정하고 단계별 실행</li>
+                        <li>명상이나 요가로 마음 다스리기</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="fortune-prediction fade-in">
+            <h2 class="section-title">🔮 권민찬의 운세 예측</h2>
+            <div class="years-grid">
+                <div class="year-card">
+                    <div class="year-title">2025년 (15세)</div>
+                    <p>🌟 변화의 시작<br>새로운 재능 발견과<br>리더십 개발의 해</p>
+                </div>
+                <div class="year-card">
+                    <div class="year-title">2026년 (16세)</div>
+                    <p>⚡ 파군성 활성화<br>큰 변화와 도전<br>혁신적 아이디어 등장</p>
+                </div>
+                <div class="year-card">
+                    <div class="year-title">2027년 (17세)</div>
+                    <p>🎨 탐랑성 개화<br>예술적 재능 폭발<br>다양한 경험 축적</p>
+                </div>
+                <div class="year-card">
+                    <div class="year-title">2028년 (18세)</div>
+                    <p>👑 자미성 완성<br>진정한 리더로 성장<br>인생 방향 확정</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="interactive-section fade-in">
+            <h2 class="section-title">🎮 권민찬을 위한 액션 플랜</h2>
+            <p style="margin-bottom: 25px;">
+                이제 분석 결과를 바탕으로 실제 행동에 옮겨보자!<br>
+                권민찬의 별들이 최고의 시너지를 낼 수 있도록 도와줄 특별한 도구들이야.
+            </p>
+            <button class="action-btn" onclick="openPersonalityTool()">
+                🛠️ 성격 개선 도구 사용하기
+            </button>
+            <button class="action-btn" onclick="openCreativeSpace()">
+                🎨 창작 공간 만들기
+            </button>
+            <button class="action-btn" onclick="openLeadershipTraining()">
+                👑 리더십 훈련하기
+            </button>
+            <button class="action-btn" onclick="shareFortune()">
+                📱 친구들과 운세 공유하기
+            </button>
+        </section>
+    </div>
+
+    <script>
+        // 페이지 로드 시 애니메이션 효과
+        window.addEventListener('load', () => {
+            // 사용자 데이터 로드
+            loadUserProgress();
+            
+            // 애니메이션 효과
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+
+            // 일일 체크인
+            checkDailyLogin();
+            
+            // 성취 확인
+            checkAchievements();
+
+            // 환영 메시지 (첫 방문자용)
+            const isFirstVisit = !localStorage.getItem('minchanVisited');
+            if (isFirstVisit) {
+                localStorage.setItem('minchanVisited', 'true');
+                
+                setTimeout(() => {
+                    alert(`🌟 안녕, 권민찬! 네 별자리를 분석해봤어!
+
+💫 너는 정말 특별한 조합을 가지고 있네:
+
+⚔️ 칠살성: 용감한 전사의 기질
+🎨 탐랑성: 예술가의 영혼  
+💥 파군성: 변화를 만드는 혁명가
+⚖️ 염정성: 공정한 심판관
+
+이 네 별들이 합쳐져서 엄청나게 강력한 에너지를 만들고 있어!
+가끔 화가 나거나 답답한 건 이 별들이 깨어나고 있는 신호야.
+
+아래 버튼들을 눌러서 실제로 사용할 수 있는 도구들을 체험해봐! 🚀
+
+💡 팁: Ctrl+1,2,3,4 단축키로도 빠르게 접근할 수 있어!`);
+                }, 2000);
+            } else {
+                // 기존 사용자용 간단한 인사
+                setTimeout(() => {
+                    const emotionCount = userData.emotions.length;
+                    const artworkCount = userData.artworks.length;
+                    
+                    alert(`👋 다시 만나서 반가워, 권민찬!
+
+📊 지금까지의 성장:
+• 감정 기록: ${emotionCount}회
+• 창작 작품: ${artworkCount}개
+• 성취: ${userData.achievements.length}개
+
+오늘도 새로운 성장을 만들어보자! ✨`);
+                }, 1500);
+            }
+        });
+
+        // 전역 상태 관리
+        let currentTool = null;
+        let userData = JSON.parse(localStorage.getItem('minchanData') || '{"emotions": [], "artworks": [], "leadership": {"decisiveness": 65, "charisma": 78, "innovation": 45, "fairness": 60}, "achievements": []}');
+
+        // 도구 모달 시스템
+        function createModal(title, content) {
+            const modal = document.createElement('div');
+            modal.className = 'tool-modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>${title}</h2>
+                        <button class="close-btn" onclick="closeModal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        ${content}
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            requestAnimationFrame(() => modal.classList.add('show'));
+        }
+
+        function closeModal() {
+            const modal = document.querySelector('.tool-modal');
+            if (modal) {
+                modal.classList.remove('show');
+                setTimeout(() => modal.remove(), 300);
+            }
+        }
+
+        // 1. 감정 밸런스 마스터
+        function openPersonalityTool() {
+            const content = `
+                <div class="emotion-tool">
+                    <div class="emotion-wheel-container">
+                        <canvas id="emotionWheel" width="300" height="300"></canvas>
+                        <div class="emotion-center">
+                            <div id="currentMood">😐</div>
+                            <div id="moodText">보통</div>
+                        </div>
+                    </div>
+                    
+                    <div class="emotion-controls">
+                        <h3>🌟 지금 기분은?</h3>
+                        <div class="emotion-buttons">
+                            <button onclick="setMood('😤', '화남', '#ff6b6b', 90)">😤 화남</button>
+                            <button onclick="setMood('😊', '행복', '#4ecdc4', 20)">😊 행복</button>
+                            <button onclick="setMood('😰', '불안', '#feca57', 70)">😰 불안</button>
+                            <button onclick="setMood('🤔', '고민', '#9b59b6', 50)">🤔 고민</button>
+                            <button onclick="setMood('😴', '피곤', '#95a5a6', 30)">😴 피곤</button>
+                        </div>
+                    </div>
+
+                    <div class="breathing-section">
+                        <h3>🌬️ 호흡 운동</h3>
+                        <div class="breathing-controls">
+                            <button onclick="startBreathingExercise('calm')">차분한 호흡 (4-7-8)</button>
+                            <button onclick="startBreathingExercise('balance')">균형 호흡 (4-4-4)</button>
+                            <button onclick="startBreathingExercise('energy')">에너지 호흡 (6-2-6)</button>
+                        </div>
+                        <div class="breathing-circle" id="breathingCircle">
+                            <div class="breathing-text" id="breathingText">호흡 운동을 선택하세요</div>
+                        </div>
+                    </div>
+
+                    <div class="emotion-history">
+                        <h3>📊 감정 히스토리</h3>
+                        <canvas id="emotionChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            `;
+            
+            createModal('🧠 감정 밸런스 마스터', content);
+            setTimeout(() => {
+                initEmotionWheel();
+                drawEmotionHistory();
+            }, 100);
+        }
+
+        // 2. 크리에이티브 유니버스
+        function openCreativeSpace() {
+            const content = `
+                <div class="creative-tool">
+                    <div class="canvas-section">
+                        <h3>🎨 감정 캔버스</h3>
+                        <div class="canvas-controls">
+                            <button onclick="setBrushMode('freedom')">🌈 자유 표현</button>
+                            <button onclick="setBrushMode('anger')">⚡ 분노 에너지</button>
+                            <button onclick="setBrushMode('calm')">🌊 평온함</button>
+                            <button onclick="setBrushMode('joy')">☀️ 기쁨</button>
+                            <button onclick="clearCanvas()">🗑️ 지우기</button>
+                            <button onclick="saveArtwork()">💾 저장</button>
+                        </div>
+                        <canvas id="artCanvas" width="500" height="400"></canvas>
+                    </div>
+
+                    <div class="writing-section">
+                        <h3>📝 감정 일기</h3>
+                        <textarea id="emotionDiary" placeholder="지금 마음에 떠오르는 것들을 자유롭게 써봐...
+
+예를 들어:
+- 오늘 학교에서 있었던 일
+- 친구들과의 대화
+- 기분 좋았던/나빴던 순간
+- 앞으로의 계획이나 꿈
+
+뭐든 좋아, 네 마음 속 이야기를 들려줘! ✨"></textarea>
+                        <button onclick="saveDiary()">💌 일기 저장</button>
+                    </div>
+
+                    <div class="gallery-section">
+                        <h3>🖼️ 나의 갤러리</h3>
+                        <div id="artworkGallery" class="gallery-grid"></div>
+                    </div>
+                </div>
+            `;
+            
+            createModal('🎨 크리에이티브 유니버스', content);
+            setTimeout(() => {
+                initArtCanvas();
+                loadArtworkGallery();
+            }, 100);
+        }
+
+        // 3. 리더십 시뮬레이터
+        function openLeadershipTraining() {
+            const content = `
+                <div class="leadership-tool">
+                    <div class="leadership-stats">
+                        <h3>👑 리더십 능력치</h3>
+                        <canvas id="leadershipChart" width="300" height="300"></canvas>
+                    </div>
+
+                    <div class="scenario-section">
+                        <h3>🎭 리더십 시나리오</h3>
+                        <div id="scenarioCard" class="scenario-card">
+                            <h4 id="scenarioTitle">시나리오를 선택하세요</h4>
+                            <p id="scenarioText"></p>
+                            <div id="scenarioChoices" class="choice-buttons"></div>
+                        </div>
+                        <button onclick="loadRandomScenario()">🎲 새로운 상황</button>
+                    </div>
+
+                    <div class="leadership-tips">
+                        <h3>💡 권민찬을 위한 리더십 팁</h3>
+                        <div class="tip-cards">
+                            <div class="tip-card">
+                                <strong>⚔️ 칠살성 활용법:</strong><br>
+                                정의감을 바탕으로 공정한 결정을 내리되, 다른 사람의 감정도 고려해보자
+                            </div>
+                            <div class="tip-card">
+                                <strong>🎨 탐랑성 활용법:</strong><br>
+                                창의적인 아이디어로 문제 해결의 새로운 방법을 제시해보자
+                            </div>
+                            <div class="tip-card">
+                                <strong>💥 파군성 활용법:</strong><br>
+                                변화가 필요한 상황에서 혁신적인 접근을 시도해보자
+                            </div>
+                            <div class="tip-card">
+                                <strong>⚖️ 염정성 활용법:</strong><br>
+                                객관적인 기준으로 상황을 판단하되, 융통성도 발휘해보자
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            createModal('👑 리더십 시뮬레이터', content);
+            setTimeout(() => {
+                initLeadershipChart();
+                loadRandomScenario();
+            }, 100);
+        }
+
+        // 4. 성장 공유 플랫폼
+        function shareFortune() {
+            const content = `
+                <div class="share-tool">
+                    <div class="share-card-preview">
+                        <h3>📱 공유 카드 미리보기</h3>
+                        <canvas id="shareCard" width="400" height="600"></canvas>
+                    </div>
+
+                    <div class="share-options">
+                        <h3>🎨 카드 커스터마이징</h3>
+                        <div class="customization-panel">
+                            <label>배경 테마:</label>
+                            <select id="cardTheme" onchange="updateShareCard()">
+                                <option value="cosmic">🌌 우주</option>
+                                <option value="nature">🌿 자연</option>
+                                <option value="neon">⚡ 네온</option>
+                                <option value="classic">📜 클래식</option>
+                            </select>
+
+                            <label>포함할 정보:</label>
+                            <div class="share-checkboxes">
+                                <label><input type="checkbox" id="includeStats" checked> 성격 분석</label>
+                                <label><input type="checkbox" id="includeGrowth" checked> 성장 현황</label>
+                                <label><input type="checkbox" id="includeMessage"> 개인 메시지</label>
+                            </div>
+
+                            <div id="personalMessage" style="display:none;">
+                                <textarea placeholder="친구들에게 전하고 싶은 메시지..."></textarea>
+                            </div>
+                        </div>
+                        <button onclick="generateShareCard()">🎨 카드 생성</button>
+                    </div>
+
+                    <div class="share-buttons">
+                        <h3>📤 공유하기</h3>
+                        <button onclick="shareToSocial('instagram')" class="share-btn instagram">📸 Instagram</button>
+                        <button onclick="shareToSocial('kakao')" class="share-btn kakao">💬 KakaoTalk</button>
+                        <button onclick="shareToSocial('twitter')" class="share-btn twitter">🐦 Twitter</button>
+                        <button onclick="downloadCard()" class="share-btn download">💾 이미지 저장</button>
+                    </div>
+                </div>
+            `;
+            
+            createModal('📱 성장 공유 플랫폼', content);
+            setTimeout(() => {
+                generateShareCard();
+                setupShareOptions();
+            }, 100);
+        }
+
+        // 감정 휠 초기화
+        function initEmotionWheel() {
+            const canvas = document.getElementById('emotionWheel');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            drawEmotionWheel(ctx, canvas.width, canvas.height);
+        }
+
+        function drawEmotionWheel(ctx, width, height) {
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = Math.min(width, height) / 2 - 20;
+            
+            // 4개 별성 영역
+            const stars = [
+                { name: '칠살성', color: '#e74c3c', angle: 0 },
+                { name: '탐랑성', color: '#f39c12', angle: Math.PI / 2 },
+                { name: '파군성', color: '#9b59b6', angle: Math.PI },
+                { name: '염정성', color: '#3498db', angle: 3 * Math.PI / 2 }
+            ];
+            
+            stars.forEach((star, index) => {
+                const startAngle = star.angle - Math.PI / 4;
+                const endAngle = star.angle + Math.PI / 4;
+                
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                ctx.lineTo(centerX, centerY);
+                ctx.fillStyle = star.color + '40';
+                ctx.fill();
+                ctx.strokeStyle = star.color;
+                ctx.lineWidth = 3;
+                ctx.stroke();
+                
+                // 별성 이름
+                const textX = centerX + Math.cos(star.angle) * (radius * 0.7);
+                const textY = centerY + Math.sin(star.angle) * (radius * 0.7);
+                ctx.fillStyle = 'white';
+                ctx.font = '12px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(star.name, textX, textY);
+            });
+        }
+
+        function setMood(emoji, text, color, intensity) {
+            document.getElementById('currentMood').textContent = emoji;
+            document.getElementById('moodText').textContent = text;
+            
+            // 감정 데이터 저장
+            const emotionData = {
+                emoji, text, color, intensity,
+                timestamp: new Date().toISOString(),
+                date: new Date().toLocaleDateString()
+            };
+            
+            userData.emotions.push(emotionData);
+            localStorage.setItem('minchanData', JSON.stringify(userData));
+            
+            // 감정 히스토리 업데이트
+            drawEmotionHistory();
+            
+            // 피드백 메시지
+            showFeedback(text, intensity);
+        }
+
+        function showFeedback(emotion, intensity) {
+            let advice = '';
+            if (intensity > 70) {
+                advice = '강한 감정이 느껴지네! 호흡 운동으로 마음을 진정시켜보자 🌬️';
+            } else if (intensity < 30) {
+                advice = '평온한 상태야! 이 기분을 오래 유지해보자 ✨';
+            } else {
+                advice = '적당한 감정 상태야. 지금 기분을 창작으로 표현해볼까? 🎨';
+            }
+            
+            setTimeout(() => {
+                alert(`${emotion} 상태 기록 완료!\n\n💡 조언: ${advice}`);
+            }, 500);
+        }
+
+        function startBreathingExercise(type) {
+            const circle = document.getElementById('breathingCircle');
+            const text = document.getElementById('breathingText');
+            
+            let pattern;
+            switch(type) {
+                case 'calm': pattern = [4, 7, 8]; break; // 4초 들숨, 7초 멈춤, 8초 날숨
+                case 'balance': pattern = [4, 4, 4]; break;
+                case 'energy': pattern = [6, 2, 6]; break;
+            }
+            
+            circle.classList.add('active');
+            let cycle = 0;
+            const maxCycles = 5;
+            
+            function breatheCycle() {
+                if (cycle >= maxCycles) {
+                    circle.classList.remove('active');
+                    text.textContent = '호흡 운동 완료! 잘했어요 👍';
+                    return;
+                }
+                
+                // 들숨
+                text.textContent = `숨을 들이마셔... ${pattern[0]}초`;
+                setTimeout(() => {
+                    // 멈춤
+                    text.textContent = `숨을 멈춰... ${pattern[1]}초`;
+                    setTimeout(() => {
+                        // 날숨
+                        text.textContent = `천천히 내뱉어... ${pattern[2]}초`;
+                        setTimeout(() => {
+                            cycle++;
+                            breatheCycle();
+                        }, pattern[2] * 1000);
+                    }, pattern[1] * 1000);
+                }, pattern[0] * 1000);
+            }
+            
+            breatheCycle();
+        }
+
+        function drawEmotionHistory() {
+            const canvas = document.getElementById('emotionChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const recentEmotions = userData.emotions.slice(-7); // 최근 7개
+            if (recentEmotions.length === 0) return;
+            
+            const width = canvas.width - 40;
+            const height = canvas.height - 40;
+            const stepX = width / Math.max(recentEmotions.length - 1, 1);
+            
+            // 선 그리기
+            ctx.beginPath();
+            ctx.strokeStyle = '#48dbfb';
+            ctx.lineWidth = 3;
+            
+            recentEmotions.forEach((emotion, index) => {
+                const x = 20 + index * stepX;
+                const y = 20 + height - (emotion.intensity / 100) * height;
+                
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+                
+                // 점 그리기
+                ctx.fillStyle = emotion.color || '#48dbfb';
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, 2 * Math.PI);
+                ctx.fill();
+            });
+            
+            ctx.stroke();
+        }
+
+        // 아트 캔버스 초기화
+        function initArtCanvas() {
+            const canvas = document.getElementById('artCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            let isDrawing = false;
+            let currentBrush = 'freedom';
+            
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('touchstart', handleTouch);
+            canvas.addEventListener('touchmove', handleTouch);
+            canvas.addEventListener('touchend', stopDrawing);
+            
+            function startDrawing(e) {
+                isDrawing = true;
+                draw(e);
+            }
+            
+            function draw(e) {
+                if (!isDrawing) return;
+                
+                const rect = canvas.getBoundingClientRect();
+                const x = (e.clientX || e.touches[0].clientX) - rect.left;
+                const y = (e.clientY || e.touches[0].clientY) - rect.top;
+                
+                ctx.lineCap = 'round';
+                
+                switch(currentBrush) {
+                    case 'freedom':
+                        ctx.strokeStyle = `hsl(${Math.random() * 360}, 70%, 50%)`;
+                        ctx.lineWidth = 5;
+                        break;
+                    case 'anger':
+                        ctx.strokeStyle = '#ff6b6b';
+                        ctx.lineWidth = 8;
+                        break;
+                    case 'calm':
+                        ctx.strokeStyle = '#48dbfb';
+                        ctx.lineWidth = 3;
+                        break;
+                    case 'joy':
+                        ctx.strokeStyle = '#feca57';
+                        ctx.lineWidth = 6;
+                        break;
+                }
+                
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+            }
+            
+            function stopDrawing() {
+                if (isDrawing) {
+                    isDrawing = false;
+                    ctx.beginPath();
+                }
+            }
+            
+            function handleTouch(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : 
+                                                e.type === 'touchmove' ? 'mousemove' : 'mouseup', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                canvas.dispatchEvent(mouseEvent);
+            }
+            
+            window.setBrushMode = function(mode) {
+                currentBrush = mode;
+                document.querySelectorAll('.canvas-controls button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                event.target.classList.add('active');
+            };
+            
+            window.clearCanvas = function() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            };
+        }
+
+        function saveArtwork() {
+            const canvas = document.getElementById('artCanvas');
+            const dataURL = canvas.toDataURL();
+            
+            const artwork = {
+                id: Date.now(),
+                dataURL: dataURL,
+                timestamp: new Date().toISOString(),
+                date: new Date().toLocaleDateString()
+            };
+            
+            userData.artworks.push(artwork);
+            localStorage.setItem('minchanData', JSON.stringify(userData));
+            
+            loadArtworkGallery();
+            alert('🎨 작품이 저장되었어! 갤러리에서 확인해봐!');
+        }
+
+        function loadArtworkGallery() {
+            const gallery = document.getElementById('artworkGallery');
+            if (!gallery) return;
+            
+            gallery.innerHTML = '';
+            
+            userData.artworks.slice(-6).forEach(artwork => {
+                const img = document.createElement('img');
+                img.src = artwork.dataURL;
+                img.className = 'artwork-thumbnail';
+                img.onclick = () => viewArtwork(artwork);
+                gallery.appendChild(img);
+            });
+        }
+
+        function viewArtwork(artwork) {
+            const modal = document.createElement('div');
+            modal.className = 'artwork-modal';
+            modal.innerHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <img src="${artwork.dataURL}" style="max-width: 80vw; max-height: 60vh; border-radius: 10px;">
+                    <p style="margin-top: 15px; color: white;">작품 날짜: ${artwork.date}</p>
+                    <button onclick="this.parentElement.parentElement.remove()" style="margin-top: 10px; padding: 10px 20px; background: #ff6b6b; border: none; border-radius: 5px; color: white; cursor: pointer;">닫기</button>
+                </div>
+            `;
+            modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 10001;';
+            document.body.appendChild(modal);
+        }
+
+        function saveDiary() {
+            const diary = document.getElementById('emotionDiary').value;
+            if (!diary.trim()) {
+                alert('일기를 먼저 써봐! ✍️');
+                return;
+            }
+            
+            const diaryEntry = {
+                content: diary,
+                timestamp: new Date().toISOString(),
+                date: new Date().toLocaleDateString()
+            };
+            
+            if (!userData.diaries) userData.diaries = [];
+            userData.diaries.push(diaryEntry);
+            localStorage.setItem('minchanData', JSON.stringify(userData));
+            
+            alert('💌 소중한 마음이 기록되었어! 언제든 다시 읽어볼 수 있어.');
+            document.getElementById('emotionDiary').value = '';
+        }
+
+        // 리더십 차트 초기화
+        function initLeadershipChart() {
+            const canvas = document.getElementById('leadershipChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            drawLeadershipRadar(ctx, canvas.width, canvas.height);
+        }
+
+        function drawLeadershipRadar(ctx, width, height) {
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = Math.min(width, height) / 2 - 30;
+            
+            const stats = [
+                { name: '결단력', value: userData.leadership.decisiveness, color: '#e74c3c' },
+                { name: '카리스마', value: userData.leadership.charisma, color: '#f39c12' },
+                { name: '혁신성', value: userData.leadership.innovation, color: '#9b59b6' },
+                { name: '공정성', value: userData.leadership.fairness, color: '#3498db' }
+            ];
+            
+            // 배경 원들
+            for (let i = 1; i <= 5; i++) {
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius * i / 5, 0, 2 * Math.PI);
+                ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+            
+            // 축 그리기
+            stats.forEach((stat, index) => {
+                const angle = (index * 2 * Math.PI / stats.length) - Math.PI / 2;
+                const x = centerX + Math.cos(angle) * radius;
+                const y = centerY + Math.sin(angle) * radius;
+                
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(x, y);
+                ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+                ctx.stroke();
+                
+                // 라벨
+                const labelX = centerX + Math.cos(angle) * (radius + 20);
+                const labelY = centerY + Math.sin(angle) * (radius + 20);
+                ctx.fillStyle = 'white';
+                ctx.font = '12px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(stat.name, labelX, labelY);
+                ctx.fillText(stat.value, labelX, labelY + 15);
+            });
+            
+            // 능력치 영역
+            ctx.beginPath();
+            stats.forEach((stat, index) => {
+                const angle = (index * 2 * Math.PI / stats.length) - Math.PI / 2;
+                const x = centerX + Math.cos(angle) * radius * (stat.value / 100);
+                const y = centerY + Math.sin(angle) * radius * (stat.value / 100);
+                
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            });
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(72, 219, 251, 0.3)';
+            ctx.fill();
+            ctx.strokeStyle = '#48dbfb';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        // 리더십 시나리오
+        const leadershipScenarios = [
+            {
+                title: "팀 프로젝트 갈등 상황",
+                text: "팀원들이 의견 충돌로 싸우고 있어. 너는 팀장으로서 어떻게 할래?",
+                choices: [
+                    { text: "각자 의견을 차례로 들어보고 합의점 찾기", stats: { fairness: 5, charisma: 3 } },
+                    { text: "강력하게 결정하고 따르라고 하기", stats: { decisiveness: 5, innovation: -2 } },
+                    { text: "창의적인 제3의 방법 제안하기", stats: { innovation: 5, charisma: 2 } }
+                ]
+            },
+            {
+                title: "친구의 부당한 대우",
+                text: "선배가 친구를 부당하게 대하는 걸 목격했어. 어떻게 할래?",
+                choices: [
+                    { text: "즉시 개입해서 친구를 보호하기", stats: { decisiveness: 4, fairness: 4 } },
+                    { text: "선배와 개별적으로 대화하기", stats: { charisma: 4, fairness: 2 } },
+                    { text: "선생님께 신고하기", stats: { fairness: 5, decisiveness: -1 } }
+                ]
+            },
+            {
+                title: "새로운 아이디어 제안",
+                text: "학급 활동에 혁신적인 아이디어가 있는데, 친구들이 반대해. 어떻게 할래?",
+                choices: [
+                    { text: "끝까지 설득해서 추진하기", stats: { innovation: 5, charisma: 3 } },
+                    { text: "다수의 의견을 존중하고 포기하기", stats: { fairness: 3, innovation: -2 } },
+                    { text: "소규모로 먼저 시도해보기", stats: { innovation: 3, decisiveness: 3 } }
+                ]
+            }
+        ];
+
+        function loadRandomScenario() {
+            const scenario = leadershipScenarios[Math.floor(Math.random() * leadershipScenarios.length)];
+            
+            document.getElementById('scenarioTitle').textContent = scenario.title;
+            document.getElementById('scenarioText').textContent = scenario.text;
+            
+            const choicesDiv = document.getElementById('scenarioChoices');
+            choicesDiv.innerHTML = '';
+            
+            scenario.choices.forEach((choice, index) => {
+                const button = document.createElement('button');
+                button.textContent = `${index + 1}. ${choice.text}`;
+                button.onclick = () => handleChoice(choice);
+                choicesDiv.appendChild(button);
+            });
+        }
+
+        function handleChoice(choice) {
+            // 능력치 업데이트
+            Object.keys(choice.stats).forEach(stat => {
+                userData.leadership[stat] = Math.max(0, Math.min(100, userData.leadership[stat] + choice.stats[stat]));
+            });
+            
+            localStorage.setItem('minchanData', JSON.stringify(userData));
+            
+            // 피드백 표시
+            let feedback = "좋은 선택이야! ";
+            const maxStat = Object.keys(choice.stats).reduce((a, b) => choice.stats[a] > choice.stats[b] ? a : b);
+            
+            switch(maxStat) {
+                case 'decisiveness': feedback += "결단력이 향상되었어! ⚔️"; break;
+                case 'charisma': feedback += "카리스마가 증가했어! 🎨"; break;
+                case 'innovation': feedback += "혁신성이 발전했어! 💥"; break;
+                case 'fairness': feedback += "공정성이 강화되었어! ⚖️"; break;
+            }
+            
+            alert(feedback);
+            
+            // 차트 업데이트
+            initLeadershipChart();
+            
+            // 새 시나리오 로드
+            setTimeout(loadRandomScenario, 1000);
+        }
+
+        // 공유 기능
+        function generateShareCard() {
+            const canvas = document.getElementById('shareCard');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            // 배경 그라디언트
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // 제목
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 24px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('권민찬의 별자리 운명', canvas.width/2, 50);
+            
+            // 별성들
+            const stars = [
+                { name: '칠살성 - 정의로운 전사', icon: '⚔️', y: 120 },
+                { name: '탐랑성 - 창의적 예술가', icon: '🎨', y: 170 },
+                { name: '파군성 - 혁신적 변화자', icon: '💥', y: 220 },
+                { name: '염정성 - 공정한 심판관', icon: '⚖️', y: 270 }
+            ];
+            
+            stars.forEach(star => {
+                ctx.font = '20px sans-serif';
+                ctx.fillText(star.icon, 60, star.y);
+                ctx.font = '16px sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(star.name, 100, star.y);
+            });
+            
+            // 성장 현황
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 18px sans-serif';
+            ctx.fillText('성장 현황', canvas.width/2, 350);
+            
+            const growth = [
+                `감정 조절: ${userData.leadership.fairness}%`,
+                `창의성: ${userData.leadership.charisma}%`,
+                `리더십: ${userData.leadership.decisiveness}%`,
+                `혁신성: ${userData.leadership.innovation}%`
+            ];
+            
+            growth.forEach((item, index) => {
+                ctx.font = '14px sans-serif';
+                ctx.fillText(item, canvas.width/2, 380 + index * 25);
+            });
+            
+            // 하단 메시지
+            ctx.font = 'italic 12px sans-serif';
+            ctx.fillText('15세, 별들이 깨어나는 시기 ✨', canvas.width/2, 520);
+            ctx.fillText('너도 자미두수 해보면 재밌을 거야!', canvas.width/2, 540);
+        }
+
+        function setupShareOptions() {
+            const includeMessage = document.getElementById('includeMessage');
+            const personalMessage = document.getElementById('personalMessage');
+            
+            includeMessage.addEventListener('change', function() {
+                personalMessage.style.display = this.checked ? 'block' : 'none';
+            });
+        }
+
+        function shareToSocial(platform) {
+            const canvas = document.getElementById('shareCard');
+            const dataURL = canvas.toDataURL();
+            
+            const shareText = `🌟 내 자미두수 분석 결과!
+
+⚔️ 칠살성 - 정의로운 전사
+🎨 탐랑성 - 창의적 예술가  
+💥 파군성 - 혁신적 변화자
+⚖️ 염정성 - 공정한 심판관
+
+15세인 지금이 내 별들이 깨어나는 시기래!
+너도 자미두수 해보면 재밌을 것 같아! 🚀`;
+            
+            switch(platform) {
+                case 'instagram':
+                    // Instagram은 직접 공유가 불가하므로 이미지 다운로드 + 클립보드 복사
+                    downloadImageAsFile(dataURL, 'minchan-zimidoushu.png');
+                    navigator.clipboard.writeText(shareText);
+                    alert('📸 이미지가 다운로드되고 텍스트가 복사되었어! Instagram에 올려봐!');
+                    break;
+                case 'kakao':
+                    navigator.clipboard.writeText(shareText);
+                    alert('💬 텍스트가 복사되었어! 카카오톡에 붙여넣기 해봐!');
+                    break;
+                case 'twitter':
+                    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+                    window.open(twitterUrl, '_blank');
+                    break;
+            }
+        }
+
+        function downloadCard() {
+            const canvas = document.getElementById('shareCard');
+            downloadImageAsFile(canvas.toDataURL(), 'minchan-zimidoushu-card.png');
+        }
+
+        // 궁 카드 클릭 효과
+        document.querySelectorAll('.palace-card').forEach(card => {
+            card.addEventListener('click', () => {
+                // 다른 카드들 비활성화
+                document.querySelectorAll('.palace-card').forEach(c => c.classList.remove('active'));
+                // 클릭한 카드 활성화
+                card.classList.add('active');
+                
+                // 해당 궁에 대한 상세 정보 표시
+                const palaceName = card.querySelector('.palace-name').textContent;
+                const starName = card.querySelector('.star-name').textContent;
+                
+                alert(`📍 ${palaceName} 상세 정보
+
+⭐ 주요 별: ${starName}
+
+이 궁은 권민찬의 ${getPalaceDescription(palaceName)}을 나타내는 영역이야!
+
+${starName}이 이 자리에 있다는 것은 ${getStarMeaning(starName)}를 의미해.
+
+이 영역을 더 발전시키려면:
+• 관련 활동에 적극 참여하기
+• 긍정적인 에너지 집중하기  
+• 꾸준한 노력과 관심 기울이기`);
+            });
+        });
+
+        function getPalaceDescription(palace) {
+            const descriptions = {
+                '시주 (명궁)': '핵심 성격과 운명',
+                '일주 (형제궁)': '형제자매와 친구 관계',
+                '월주 (부부궁)': '미래의 연애와 결혼',
+                '년주 (자녀궁)': '자녀운과 창조력',
+                '편관': '도전과 역경 극복력',
+                '상관': '창의성과 표현력',
+                '편인': '학습능력과 직관',
+                '정재': '재물운과 안정성'
+            };
+            return descriptions[palace] || '특별한 의미';
+        }
+
+        function getStarMeaning(star) {
+            const meanings = {
+                '자미': '황제의 기질과 리더십을 가졌다',
+                '염정': '강한 도덕관념과 정의감을 지녔다',
+                '무술': '변화와 혁신을 추구한다',
+                '신묘': '예술적 감각과 직감이 뛰어나다',
+                '파군': '파괴와 창조의 힘을 동시에 가졌다',
+                '자': '지혜롭고 사려깊은 판단력을 지녔다',
+                '미': '온화하고 조화로운 성격을 가졌다'
+            };
+            return meanings[star] || '특별한 의미를 가졌다';
+        }
+
+        // 데이터 관리 함수들
+        function saveUserProgress() {
+            localStorage.setItem('minchanData', JSON.stringify(userData));
+        }
+
+        function loadUserProgress() {
+            const saved = localStorage.getItem('minchanData');
+            if (saved) {
+                userData = JSON.parse(saved);
+            }
+        }
+
+        // 성취 시스템
+        function checkAchievements() {
+            const achievements = [];
+            
+            if (userData.emotions.length >= 5) {
+                achievements.push('감정 탐험가 - 5회 이상 감정 기록');
+            }
+            
+            if (userData.artworks.length >= 3) {
+                achievements.push('창작 마스터 - 3개 이상 작품 완성');
+            }
+            
+            if (userData.leadership.decisiveness > 80) {
+                achievements.push('결단의 왕 - 결단력 80점 돌파');
+            }
+            
+            // 새로운 성취가 있으면 알림
+            const newAchievements = achievements.filter(a => !userData.achievements.includes(a));
+            if (newAchievements.length > 0) {
+                userData.achievements.push(...newAchievements);
+                saveUserProgress();
+                
+                newAchievements.forEach(achievement => {
+                    setTimeout(() => {
+                        alert(`🏆 새로운 성취 달성!\n\n${achievement}\n\n계속 성장하고 있어! 정말 대단해! ✨`);
+                    }, 1000);
+                });
+            }
+        }
+
+        // 일일 체크인 시스템
+        function checkDailyLogin() {
+            const today = new Date().toDateString();
+            const lastLogin = localStorage.getItem('lastLogin');
+            
+            if (lastLogin !== today) {
+                localStorage.setItem('lastLogin', today);
+                
+                setTimeout(() => {
+                    alert(`🌅 안녕, 권민찬! 오늘도 별자리 여행을 시작해보자!
+
+오늘의 미션:
+⭐ 감정 체크하기
+🎨 10분 창작하기  
+👑 리더십 시나리오 1개 도전하기
+
+작은 실천이 큰 변화를 만들어! 화이팅! 💪`);
+                }, 3000);
+            }
+        }
+
+        // 스크롤 효과
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.header');
+            if (parallax) {
+                const speed = scrolled * 0.3;
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+        });
+
+        // 키보드 단축키
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case '1':
+                        e.preventDefault();
+                        openPersonalityTool();
+                        break;
+                    case '2':
+                        e.preventDefault();
+                        openCreativeSpace();
+                        break;
+                    case '3':
+                        e.preventDefault();
+                        openLeadershipTraining();
+                        break;
+                    case '4':
+                        e.preventDefault();
+                        shareFortune();
+                        break;
+                }
+            }
+            
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        function downloadImageAsFile(dataURL, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = dataURL;
+            link.click();
+        }
+    </script>
+</body>
+</html>
